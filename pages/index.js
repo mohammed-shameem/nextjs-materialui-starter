@@ -4,7 +4,7 @@ import Typography from '@material-ui/core/Typography';
 import Box from '@material-ui/core/Box';
 import Layout from '../components/layout';
 import { useUser } from '../lib/hooks';
-import auth from '../lib/with-auth';
+import WithAuth from '../lib/with-auth';
 
 const Index = () => {
   const user = useUser();
@@ -26,11 +26,10 @@ const Index = () => {
   );
 };
 
-export const getServerSideProps = async (context) => {
-  auth(context)
+export const getServerSideProps = WithAuth(async (context) => {
   return {
     props: {}, // will be passed to the page component as props
   }
-};
+});
 
-export default (Index);
+export default Index;
