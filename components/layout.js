@@ -22,6 +22,7 @@ import Menu from '@material-ui/core/Menu';
 import Router from 'next/router'
 import { serialize, parse } from 'cookie'
 import useRequest from '../hooks/use-request';
+import Link from 'next/link'
 
 const drawerWidth = 240;
 
@@ -65,7 +66,13 @@ const useStyles = makeStyles((theme) => ({
     width: '100%',
     display: 'flex',
     justifyContent: 'flex-end'
+  },
+  mobile: {
+    [theme.breakpoints.up('sm')]: {
+      display: 'none',
+    },
   }
+
 }));
 
 function ResponsiveDrawer(props) {
@@ -109,20 +116,28 @@ function ResponsiveDrawer(props) {
     setMobileOpen(!mobileOpen);
   };
 
+  const routes = [
+    { title: 'Inbox', route: '/inbox', icon: <InboxIcon/>},
+  ]
+
   const drawer = (
     <div>
       <div className={classes.toolbar} >
-        <Typography variant="h6" noWrap>
-          Project Name
-        </Typography>
+        <Link href={`/`} passHref>
+          <Typography variant="h6" noWrap>
+            Project Name
+          </Typography>
+        </Link>
       </div>
       <Divider />
       <List>
-        {['Inbox', 'Starred'].map((text, index) => (
-          <ListItem button key={text}>
-            <ListItemIcon>{index % 2 === 0 ? <InboxIcon /> : <MailIcon />}</ListItemIcon>
-            <ListItemText primary={text} />
-          </ListItem>
+        {routes.map((route, index) => (
+          <Link href={route.route} passHref key={route.title}>
+            <ListItem button >
+              <ListItemIcon>{route.icon}</ListItemIcon>
+              <ListItemText primary={route.title} />
+            </ListItem>
+          </Link>
         ))}
       </List>
     </div>
@@ -143,9 +158,9 @@ function ResponsiveDrawer(props) {
           >
             <MenuIcon />
           </IconButton>
-          {/* <Typography variant="h6" noWrap>
-            Responsive drawer
-          </Typography> */}
+          <Typography variant="h6" style={{minWidth: '9rem'}} className={classes.mobile}>
+            Project Name
+          </Typography>
           <div className={classes.appBarContent}>
               <IconButton
                 aria-label="account of current user"
