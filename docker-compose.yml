@@ -1,0 +1,17 @@
+version: '3.7'
+
+services:
+  ui:
+    build:
+      context: ./
+      dockerfile: dev.Dockerfile
+    ports:
+      - '3000:3000'
+    environment:
+      VIRTUAL_HOST: ui.company.docker
+    volumes:
+      - ./components:/app/components
+      - ./hooks:/app/hooks
+      - ./lib:/app/lib
+      - ./pages:/app/pages
+      - ./public:/app/public
