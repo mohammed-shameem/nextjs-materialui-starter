@@ -9,4 +9,4 @@ First, run the development server:
 docker-compose up
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Open [http://localhost:3000](http://localhost:3000) or [http://ui.company.docker/login](http://ui.company.docker/login) with your browser to see the result.
