@@ -1,4 +1,7 @@
 import { useState } from 'react';
+import axios from 'axios';
+import Paper from '@material-ui/core/Paper';
+import ErrorIcon from '@material-ui/icons/Error';
 
 export default () => {
   const [errors, setErrors] = useState(null);
@@ -6,23 +9,23 @@ export default () => {
   const doRequest = async ({ url, method, body }) => {
     try {
       setErrors(null);
-      const response = await fetch(url, {
+      const res = await axios({
+        url,
         method,
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(body),
+        data: body
       });
-      return response.json();
+      return res;
     } catch (err) {
-      console.log("err", err)
+      console.log("err")
       setErrors(
-        <div className="alert alert-danger">
-          <h4>Ooops....</h4>
-          <ul className="my-0">
-            {err.response.data.errors.map(err => (
-              <li key={err.message}>{err.message}</li>
+        <Paper elevation={3} square style={{padding: '1rem', marginTop: '1rem', display: 'flex'}}>
+          <ErrorIcon style={{ color: 'red' }}/>
+          <ul style={{marginTop: 0, paddingLeft: '1rem'}}>
+            {err.response.data.errors.map(msg => (
+              <li key={msg} style={{listStyle: 'none'}}>{msg}</li>
             ))}
           </ul>
-        </div>
+        </Paper>
       );
     }
   };

@@ -8,7 +8,6 @@ export default async function user(req, res) {
     res.status(200).json({ user })
   } catch (error) {
     console.error(error)
-    res.status(500).end('Authentication token is invalid, please log in')
-    // res.status(500).json({ message: 'Authentication token is invalid, please log in'});
+    res.status(401).json({ errors: ['Authentication token is invalid, please log in']});
   }
 }

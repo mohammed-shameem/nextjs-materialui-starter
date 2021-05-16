@@ -42,11 +42,13 @@ const useStyles = makeStyles(theme => ({
     margin: theme.spacing(8, 4),
     display: 'flex',
     flexDirection: 'column',
-    alignItems: 'center',
+    // alignItems: 'center',
   },
   avatar: {
-    margin: theme.spacing(1),
+    margin: 'auto',
     backgroundColor: theme.palette.secondary.main,
+    display: 'flex',
+    alignItems: 'center'
   },
   form: {
     width: '100%', // Fix IE 11 issue.
@@ -57,6 +59,9 @@ const useStyles = makeStyles(theme => ({
   },
   formHelperText: {
     color: 'red'
+  },
+  errors: {
+    padding: theme.spacing(2)
   }
 }));
 
@@ -67,7 +72,7 @@ const Login = ({}) => {
   const [isLogin, setIsLogin] = useState(true);
 
   const { doRequest, errors } = useRequest();
-
+  // console.log("errors", errors)
   // useUser({ redirectTo: '/', redirectIfFound: true });
 
   const formik = useFormik({
@@ -91,8 +96,9 @@ const Login = ({}) => {
         method: `POST`,
         body: values
       });
-      console.log("res", res, isLogin);
-      isLogin ? Router.push('/') : setIsLogin(true);
+      console.log("login res", res, isLogin);
+      if (res) isLogin ? Router.push('/') : setIsLogin(true);
+      
     //   try {
     //     const res = await fetch(isLogin ? `/api/login` : `/api/signup`, {
     //       method: 'POST',
@@ -114,12 +120,15 @@ const Login = ({}) => {
       <Grid item xs={false} sm={4} md={7} className={classes.image} />
       <Grid item xs={12} sm={8} md={5} component={Paper} elevation={6} square>
         <div className={classes.paper}>
-          <Avatar className={classes.avatar}>
-            <LockOutlinedIcon />
-          </Avatar>
-          <Typography component="h1" variant="h5">
+          {/* <div> */}
+            <Avatar className={classes.avatar}>
+              <LockOutlinedIcon />
+            </Avatar>
+          {/* </div> */}
+          <Typography component="h1" variant="h5" align='center'>
             {isLogin ? `Login` : `Sign up`}
           </Typography>
+          { errors }
           <form onSubmit={formik.handleSubmit} className={classes.form} noValidate autoComplete="off">
             { !isLogin &&
               <Grid item xs={12}>

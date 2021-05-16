@@ -27,6 +27,7 @@ export default nextConnect()
       res.status(200).send({ done: true })
     } catch (error) {
       console.error(error)
-      res.status(401).send(error.message)
+      // res.status(401).send(error.message)
+      res.status(401).json({ errors: [error.message]});
     }
   });
