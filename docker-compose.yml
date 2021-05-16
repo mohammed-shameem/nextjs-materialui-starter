@@ -10,6 +10,7 @@ services:
     environment:
       VIRTUAL_HOST: ui.company.docker
       MONGO_URL: mongodb://mongo
+      TOKEN_SECRET: this-is-a-secret-value-with-at-least-32-characters
     volumes:
       - ./components:/app/components
       - ./hooks:/app/hooks

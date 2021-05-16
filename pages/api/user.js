@@ -1,12 +1,12 @@
 import nc from 'next-connect';
-import { getLoginSession } from '../../lib/auth'
+import authmiddleware from '../../middlewares/authmiddleware';
 import { findUser } from '../../lib/user'
 import database from '../../middlewares/db';
 import { getUser } from '../../db/';
 
 export default nc()
   .use(database)
-  .use(getLoginSession)
+  .use(authmiddleware)
   .get(async (req, res) => {
     try {
       const { username } = req.user;
