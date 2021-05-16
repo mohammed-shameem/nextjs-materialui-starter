@@ -9,9 +9,27 @@ services:
       - '3000:3000'
     environment:
       VIRTUAL_HOST: ui.company.docker
+      MONGO_URL: mongodb://mongo
     volumes:
       - ./components:/app/components
       - ./hooks:/app/hooks
       - ./lib:/app/lib
       - ./pages:/app/pages
       - ./public:/app/public
+      - ./db:/app/db
+      - ./middlewares:/app/middlewares
+      - ./models:/app/models
+
+  
+  mongo:
+    image: mongo:latest
+    volumes:
+      - mongo-volume:/data/db
+    logging:
+      options:
+        max-size: 10m
+    ports:
+      - 27017:27017
+
+volumes:
+  mongo-volume:
