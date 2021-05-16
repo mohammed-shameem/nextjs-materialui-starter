@@ -10,7 +10,7 @@ export default nc()
       const user = await insertUser(body);
       return  res.status(200).json({ user });
     } catch (error) {
-      console.log("err", error)
-      return res.status(500).end({ errors: [error.message]});
+      console.log("err", error.message)
+      return res.status(400).json({ errors: ['Email already exists']});
     }
   });
