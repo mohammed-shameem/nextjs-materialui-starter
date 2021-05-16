@@ -72,8 +72,6 @@ const Login = ({}) => {
   const [isLogin, setIsLogin] = useState(true);
 
   const { doRequest, errors } = useRequest();
-  // console.log("errors", errors)
-  // useUser({ redirectTo: '/', redirectIfFound: true });
 
   const formik = useFormik({
     initialValues: {
@@ -98,21 +96,7 @@ const Login = ({}) => {
       });
       console.log("login res", res, isLogin);
       if (res) isLogin ? Router.push('/') : setIsLogin(true);
-      
-    //   try {
-    //     const res = await fetch(isLogin ? `/api/login` : `/api/signup`, {
-    //       method: 'POST',
-    //       headers: { 'Content-Type': 'application/json' },
-    //       body: JSON.stringify(values),
-    //     })
-    //     if (res.status === 200) {
-    //       isLogin ? Router.push('/') : setIsLogin(true);
-    //     } else {
-    //       throw new Error(await res.text())
-    //     }
-    //   } catch (error) {
-    //     console.error('An unexpected error happened occurred:', error)
-    //   }
+   
     },
   });
   return (

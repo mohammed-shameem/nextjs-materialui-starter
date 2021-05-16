@@ -1,6 +1,5 @@
 import nc from 'next-connect';
 import authmiddleware from '../../middlewares/authmiddleware';
-import { findUser } from '../../lib/user'
 import database from '../../middlewares/db';
 import { getUser } from '../../db/';
 

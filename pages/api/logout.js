@@ -1,5 +1,4 @@
 import nc from 'next-connect';
-import { createUser } from '../../lib/user'
 import { removeTokenCookie } from '../../lib/auth-cookies';
 
 export default nc()
