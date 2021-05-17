@@ -13,7 +13,6 @@ export default async function getLoginSession(req, res, next) {
 
     const session = await Iron.unseal(token, TOKEN_SECRET, Iron.defaults)
     const expiresAt = session.createdAt + session.maxAge * 1000
-    console.log("session", session)
     // Validate the expiration date of the session
     if (Date.now() > expiresAt) throw new Error('Session expired');
     req.user = session;

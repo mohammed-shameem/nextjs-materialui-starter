@@ -94,7 +94,6 @@ const Login = ({}) => {
         method: `POST`,
         body: values
       });
-      console.log("login res", res, isLogin);
       if (res) isLogin ? Router.push('/') : setIsLogin(true);
    
     },

@@ -13,7 +13,6 @@ export async function insertUser({ fullName, username, password }) {
     hash,
     salt,
   }
-  console.log("user", user)
   return User.create(user);
 };
 
